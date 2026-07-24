@@ -15,8 +15,8 @@ const Home = () => {
               accessible interfaces with React and TypeScript.
             </p>
             <div className="cta-row cta-row--center">
-              <Link className="button" to="/journey">
-                Explore Journey
+              <Link className="button" to="/projects">
+                View my work
               </Link>
               <Link className="button button-ghost" to="/contact">
                 Contact
