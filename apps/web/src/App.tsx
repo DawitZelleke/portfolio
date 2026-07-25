@@ -1,80 +1,81 @@
-import { useState } from 'react';
-import { Link, NavLink, Route, Routes } from 'react-router-dom';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Home from './pages/Home';
-import Projects from './pages/Projects';
-import './App.css';
+import { lazy, Suspense } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Nav } from '@/components/layout/Nav';
+import { Footer } from '@/components/layout/Footer';
+import { HomePage } from '@/features/home/HomePage';
+import { ButtonLink } from '@/components/ui/Button';
 
-const NAV_ITEMS = [
-  { to: '/', label: 'Home' },
-  { to: '/projects', label: 'Projects' },
-  { to: '/about', label: 'About' },
-  { to: '/contact', label: 'Contact' },
-] as const;
+const CaseStudyPage = lazy(() =>
+  import('@/features/projects/CaseStudyPage').then((m) => ({ default: m.CaseStudyPage })),
+);
 
-const App = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+const AdminApp = lazy(() =>
+  import('@/features/admin/AdminApp').then((m) => ({ default: m.AdminApp })),
+);
 
-  const closeMenu = () => setMenuOpen(false);
-
+function NotFound() {
   return (
-    <div className="frame">
-      <nav className="navbar" aria-label="Primary">
-        <div className="nav-left">
-          <button
-            type="button"
-            className="nav-toggle"
-            onClick={() => setMenuOpen((prev) => !prev)}
-            aria-label="Toggle menu"
-            aria-expanded={menuOpen}
-            aria-controls="primary-navigation"
-          >
-            <span className="nav-toggle__bar" />
-            <span className="nav-toggle__bar" />
-            <span className="nav-toggle__bar" />
-          </button>
-
-          <ul id="primary-navigation" className={`nav-links${menuOpen ? ' is-open' : ''}`}>
-            {NAV_ITEMS.map((item) => (
-              <li key={item.to}>
-                <NavLink
-                  to={item.to}
-                  onClick={closeMenu}
-                  className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
-                >
-                  {item.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="nav-center">
-          <Link to="/" className="brand nav-title" onClick={closeMenu}>
-            <img src="/icons8-fido.svg" alt="" className="logo-mark" aria-hidden="true" />
-            DAVEVSGOLIATH
-          </Link>
-        </div>
-
-        <div className="nav-right">
-          <Link to="/contact" className="nav-link contact-pill" onClick={closeMenu}>
-            Contact
-          </Link>
-        </div>
-      </nav>
-
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </main>
+    <div className="mx-auto max-w-3xl px-5 pb-24 pt-40 text-center">
+      <p className="ledger mb-4">404 · not on the record</p>
+      <h1 className="font-display text-display font-semibold text-ink">This page doesn’t exist</h1>
+      <p className="mt-4 text-ink-soft">The link may be old, or mistyped.</p>
+      <div className="mt-8">
+        <ButtonLink to="/">Back home</ButtonLink>
+      </div>
     </div>
   );
-};
+}
+
+/** Scroll to hash targets on route change (e.g. /#projects from a case study). */
+function ScrollManager() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) {
+      document.getElementById(hash.slice(1))?.scrollIntoView();
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
+  return null;
+}
+
+const App = () => (
+  <div className="flex min-h-screen flex-col">
+    <a
+      href="#main"
+      className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-button focus:bg-ink focus:px-4 focus:py-2 focus:text-on-dark"
+    >
+      Skip to content
+    </a>
+    <ScrollManager />
+    <Nav />
+    <main id="main" className="flex-1">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/projects/:slug"
+          element={
+            <Suspense fallback={<div className="px-5 pt-40 text-center text-ink-soft">Loading…</div>}>
+              <CaseStudyPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/admin/*"
+          element={
+            <Suspense
+              fallback={<div className="px-5 pt-40 text-center text-ink-soft">Loading…</div>}
+            >
+              <AdminApp />
+            </Suspense>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </main>
+    <Footer />
+  </div>
+);
 
 export default App;
