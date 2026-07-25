@@ -1,31 +1,34 @@
-# DAVEVSGOLIATH — Portfolio Platform
+# DAVEVSGOLIATH — dawitzelleke.dev platform
 
-Personal portfolio of Dawit Zelleke: single-page public site + case studies,
-backed by a self-hosted Express/Postgres API. See `docs/` and the project
-spec for architecture and security decisions.
+Portfolio of **Dawit Zelleke** — full-stack developer, Ottawa. Not a
+static page: a small production system, run end-to-end as proof of the
+skills it presents.
 
-## Workspace
+- **Front end** — React 19 · TypeScript · Tailwind v4 · Vite · motion ·
+  TanStack Query. Single-page portfolio + markdown case studies + admin
+  dashboard. Deploys to Vercel; falls back to bundled content if the API
+  is offline.
+- **API** — Express 5 · Drizzle · PostgreSQL (PGlite in dev/test).
+  Argon2id auth, rotating refresh tokens with reuse detection, RBAC,
+  AES-256-GCM encrypted contact messages, append-only audit log,
+  RFC 7807 errors. Self-hosted on a hardened VPS behind Caddy.
+- **Shared** — zod contracts typing both sides of the wire.
 
-pnpm monorepo:
-
-- `apps/web` — Vite + React 19 + TypeScript + Tailwind v4 (public site + admin)
-- `apps/api` — Express 5 + TypeScript (M0 stub; full build in M4/M5)
-- `packages/shared` — zod schemas shared between web and api
-- `infra/` — Docker Compose, Caddy, VPS hardening docs (M7)
-
-## Commands
+## Quick start
 
 ```bash
-pnpm install        # all workspaces
-pnpm dev            # web dev server
-pnpm dev:api        # api dev server (stub)
-pnpm lint           # eslint (flat config, root)
-pnpm typecheck      # all workspaces
-pnpm test           # all workspaces
-pnpm build          # all workspaces
+pnpm install
+pnpm dev        # web on :5173 (runs on fixtures)
+pnpm dev:api    # api on :3001 (embedded Postgres, auto-seeded)
+pnpm test       # 15 tests: RTL + supertest against a real PG engine
+pnpm build      # all workspaces
 ```
 
-## Roadmap
+Dev admin: `admin@portfolio.local` / `dev-password-change-me` at `/admin`.
 
-M0 foundation ✅ → M1 design system → M2 public site → M3 case studies
-→ M4 API core → M5 auth + admin → M6 hardening → M7 ship
+## Docs
+
+- `docs/architecture.md` — system shape and why
+- `docs/security-decisions.md` — every control, defended
+- `docs/DEPLOYMENT.md` — Vercel + VPS runbook and launch checklist
+- `infra/hardening.md` — day-one server hardening, append-only audit role

@@ -1,0 +1,14 @@
+# Replace api.yourdomain.com with the real API hostname once the domain
+# is purchased. Caddy provisions and renews Let's Encrypt certs itself.
+api.yourdomain.com {
+	encode zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "no-referrer"
+		-Server
+	}
+
+	reverse_proxy api:3001
+}

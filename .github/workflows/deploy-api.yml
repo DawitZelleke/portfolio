@@ -1,0 +1,26 @@
+# Deploys the API to the VPS on pushes to main that touch the backend.
+# Requires repo secrets: VPS_HOST, VPS_USER, VPS_SSH_KEY.
+name: Deploy API
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/api/**'
+      - 'packages/shared/**'
+      - 'infra/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /opt/portfolio
+            git pull --ff-only
+            cd infra
+            docker compose up -d --build
+            docker system prune -f
