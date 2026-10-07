@@ -32,7 +32,7 @@ export function ContactSection() {
   });
 
   return (
-    <Section id="contact" entry="06 · open channel" title="Let’s talk">
+    <Section id="contact" entry="07 · open channel" title="Let’s talk" tone="alt">
       <div className="grid gap-10 md:grid-cols-[2fr_3fr]">
         <Reveal className="space-y-5 text-[1.02rem] leading-relaxed text-ink-soft">
           <p>
@@ -50,7 +50,13 @@ export function ContactSection() {
         </Reveal>
 
         <Reveal>
-          {mutation.isSuccess ? (
+          {import.meta.env.VITE_STATIC_ONLY === 'true' ? (
+            <div className="rounded-card border border-line bg-surface p-6 shadow-card sm:p-8">
+              <h3 className="font-display text-title font-semibold text-ink">Start a conversation</h3>
+              <p className="mt-3 text-ink-soft">Tell me about the role or project you have in mind. Send me an email and I’ll get back to you.</p>
+              <a href={`mailto:${site.email}`} className="mt-6 inline-flex min-h-11 items-center rounded-button bg-accent px-5 py-2.5 font-semibold text-white transition-colors hover:bg-accent-deep">Email me ↗</a>
+            </div>
+          ) : mutation.isSuccess ? (
             <div
               className="rounded-card border border-moss/30 bg-moss-tint p-8 text-center"
               role="status"

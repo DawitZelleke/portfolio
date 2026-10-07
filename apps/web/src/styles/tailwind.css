@@ -1,43 +1,43 @@
 @import 'tailwindcss';
 
 /* ------------------------------------------------------------------ */
-/* DAVEVSGOLIATH — Warm Modernist design tokens                        */
-/* Warm ivory ground, bronze/honey accent, mono "ledger" voice.        */
+/* DAVEVSGOLIATH — Cloud / Cobalt design tokens                        */
+/* Cool cloud ground, cobalt/teal accent, mono "ledger" voice.        */
 /* ------------------------------------------------------------------ */
 
 @theme {
   --color-*: initial;
 
   /* Ground */
-  --color-canvas: #faf6ef;
-  --color-surface: #fffdf9;
-  --color-surface-2: #f1eade;
-  --color-footer: #211c15;
+  --color-canvas: #f5f7fb;
+  --color-surface: #ffffff;
+  --color-surface-2: #eaf0f7;
+  --color-footer: #101b30;
 
   /* Ink */
-  --color-ink: #221c13;
-  --color-ink-soft: #6b6152;
-  --color-ink-faint: #978c7a;
-  --color-on-dark: #f3ede2;
-  --color-on-dark-soft: #b0a692;
+  --color-ink: #142238;
+  --color-ink-soft: #475569;
+  --color-ink-faint: #596b82;
+  --color-on-dark: #f5f8ff;
+  --color-on-dark-soft: #afbed3;
 
   /* Lines */
-  --color-line: #e3dac9;
-  --color-line-strong: #cdc1aa;
+  --color-line: #dbe3ee;
+  --color-line-strong: #8495ad;
 
-  /* Accent — bronze/honey */
-  --color-accent: #8f5a12;        /* AA on canvas for text */
-  --color-accent-bright: #c07a1d; /* large type, UI fills   */
-  --color-accent-tint: #f6e9d2;
-  --color-accent-deep: #6d440d;
+  /* Accent — cobalt */
+  --color-accent: #2454c6;        /* AA on canvas for text */
+  --color-accent-bright: #2563eb; /* large type, UI fills   */
+  --color-accent-tint: #e8efff;
+  --color-accent-deep: #1e40af;
 
-  /* Secondary — moss */
-  --color-moss: #57684d;
-  --color-moss-tint: #e8ecdf;
+  /* Secondary — teal (legacy moss token names) */
+  --color-moss: #0f706b;
+  --color-moss-tint: #dff3ef;
 
   /* Feedback */
-  --color-danger: #a3401f;
-  --color-danger-tint: #f8e5dc;
+  --color-danger: #b4233b;
+  --color-danger-tint: #fff0f2;
 
   --color-white: #ffffff;
   --color-transparent: transparent;
@@ -55,10 +55,10 @@
   --text-title: clamp(1.35rem, 1.1rem + 1vw, 1.7rem);
   --text-title--line-height: 1.2;
 
-  /* Depth — layered warm shadows, never pure black */
-  --shadow-card: 0 1px 2px rgb(34 28 19 / 0.05), 0 8px 24px rgb(34 28 19 / 0.06);
-  --shadow-lift: 0 2px 4px rgb(34 28 19 / 0.06), 0 12px 32px rgb(34 28 19 / 0.1);
-  --shadow-pop: 0 4px 8px rgb(34 28 19 / 0.08), 0 20px 48px rgb(34 28 19 / 0.14);
+  /* Depth — layered navy shadows, never pure black */
+  --shadow-card: 0 1px 2px rgb(20 34 56 / 0.05), 0 8px 24px rgb(20 34 56 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(20 34 56 / 0.06), 0 12px 32px rgb(20 34 56 / 0.1);
+  --shadow-pop: 0 4px 8px rgb(20 34 56 / 0.08), 0 20px 48px rgb(20 34 56 / 0.14);
 
   /* Shape */
   --radius-field: 0.375rem;

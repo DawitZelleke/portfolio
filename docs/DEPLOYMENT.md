@@ -51,8 +51,30 @@ cd infra && docker compose up -d --build
 
 - [ ] Buy a domain; point `api.<domain>` A record at the VPS IP
 - [ ] Replace `api.yourdomain.com` in `infra/Caddyfile`
-- [ ] Set `CORS_ORIGINS` to the exact Vercel URL
+- [ ] Set `CORS_ORIGINS` to the exact production origin
 - [ ] `VITE_API_URL` set in Vercel → redeploy
+
+### The domain swap — every place the old URL is hardcoded
+
+Do these in one pass or the SEO tags will disagree with each other:
+
+- [ ] `apps/web/index.html` — `canonical`, `og:url`, `og:image`, JSON-LD `url`
+- [ ] `apps/web/public/sitemap.xml` — all five `<loc>` entries
+- [ ] `apps/web/public/robots.txt` — the `Sitemap:` line
+- [ ] `infra/.env.example` → `infra/.env` on the server — `CORS_ORIGINS`
+- [ ] Vercel → Domains: add the domain, keep the `.vercel.app` as a 308 redirect
+- [ ] Tighten `connect-src` in `apps/web/vercel.json` from `https:` to the exact
+      API origin. If Turnstile gets wired up, it also needs
+      `script-src https://challenges.cloudflare.com` and the matching `frame-src`.
+- [ ] Verify the domain in Resend and change the `from:` address in
+      `apps/api/src/modules/contact/routes.ts` — `onboarding@resend.dev` lands in spam
+
+### Before the first share
+
+- [ ] `TURNSTILE_SECRET` must stay **unset** until the widget is wired into the
+      contact form — the API rejects tokenless submissions once it is set
+- [ ] Paste the URL into the Facebook/LinkedIn post inspectors to warm the
+      `og:image` cache (`/og.png`, 1200×630)
 - [ ] Run seed:admin with a real 16+ char passphrase (never the dev default)
 - [ ] Create the `portfolio_app` append-only role (hardening.md §6)
 - [ ] Cron the backup script; restore one backup once to prove it works

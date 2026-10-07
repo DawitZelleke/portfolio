@@ -25,7 +25,7 @@ export function ProjectsSection() {
   });
 
   return (
-    <Section id="projects" entry="03 · verified builds" title="Selected work" tone="alt">
+    <Section id="projects" entry="03 · academic projects" title="Selected work" tone="alt">
       {isPending ? (
         <div className="grid gap-6 md:grid-cols-2">
           <CardSkeleton />

@@ -52,7 +52,7 @@ export function CaseStudyPage() {
         <Reveal>
           <p className="ledger ledger-rule mb-5">
             case study ·{' '}
-            {project.publishedAt ? new Date(project.publishedAt).getFullYear() : 'draft'}
+            {project.publishedAt ? new Date(project.publishedAt).getFullYear() : 'project overview'}
           </p>
           <h1 className="font-display text-display font-bold tracking-tight text-ink">
             {project.title}

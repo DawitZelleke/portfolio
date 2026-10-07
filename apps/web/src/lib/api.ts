@@ -5,6 +5,7 @@ import { projectFixtures } from '@/content/projects';
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api/v1';
 
 async function getJson(path: string): Promise<unknown> {
+  if (import.meta.env.VITE_STATIC_ONLY === 'true') throw new Error('Bundled content mode');
   const res = await fetch(`${API_BASE}${path}`, {
     headers: { Accept: 'application/json' },
   });

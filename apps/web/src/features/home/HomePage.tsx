@@ -3,6 +3,7 @@ import { AboutSection } from './AboutSection';
 import { SkillsSection } from './SkillsSection';
 import { ProjectsSection } from './ProjectsSection';
 import { ExperienceSection } from './ExperienceSection';
+import { OffTheClockSection } from './OffTheClockSection';
 import { ContactSection } from '@/features/contact/ContactSection';
 
 export function HomePage() {
@@ -13,6 +14,7 @@ export function HomePage() {
       <SkillsSection />
       <ProjectsSection />
       <ExperienceSection />
+      <OffTheClockSection />
       <ContactSection />
     </>
   );

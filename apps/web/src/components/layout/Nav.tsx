@@ -58,7 +58,7 @@ export function Nav() {
           to="/"
           className="flex items-center gap-2 font-display text-sm font-bold tracking-[0.08em] text-ink"
         >
-          <img src="/icons8-fido.svg" alt="" aria-hidden="true" className="h-6 w-6" />
+          <img src="/mark.svg" alt="" aria-hidden="true" className="h-6 w-6" />
           {site.brand}
         </Link>
 
@@ -89,7 +89,7 @@ export function Nav() {
 
         <a
           href={linkFor('contact')}
-          className="hidden rounded-button bg-ink px-4 py-2 text-[0.9rem] font-semibold text-on-dark transition-colors duration-fast hover:bg-accent-deep md:inline-flex"
+          className="hidden rounded-button bg-accent px-4 py-2 text-[0.9rem] font-semibold text-white transition-colors duration-fast hover:bg-accent-deep md:inline-flex"
         >
           Get in touch
         </a>
