@@ -1,0 +1,16 @@
+# Starts the stack at boot for a rootless Podman user.
+# Assumes the repo is cloned at ~/apps/portfolio. Install: see infra/systemd/README.md
+[Unit]
+Description=Portfolio stack (Caddy + API + Postgres) via podman compose
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=%h/apps/portfolio/infra
+Environment=PODMAN_COMPOSE_WARNING_LOGS=false
+ExecStart=/usr/bin/podman compose up -d
+ExecStop=/usr/bin/podman compose down
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

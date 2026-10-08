@@ -92,6 +92,11 @@ process cannot rewrite history.
 
 ## 7. Backups
 
+Rootless Podman hosts (Fedora/RHEL): use the systemd timer in
+`infra/systemd/` (see its README). Logs land in the journal.
+
+Docker hosts without user systemd: cron works too.
+
 ```bash
 crontab -e
 # 0 3 * * * /opt/portfolio/infra/backup.sh >> /var/log/portfolio-backup.log 2>&1

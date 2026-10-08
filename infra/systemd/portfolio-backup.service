@@ -1,0 +1,9 @@
+# One backup run. Triggered by portfolio-backup.timer; run by hand with:
+#   systemctl --user start portfolio-backup.service
+[Unit]
+Description=Postgres backup for the portfolio stack
+After=portfolio.service
+
+[Service]
+Type=oneshot
+ExecStart=%h/apps/portfolio/infra/backup.sh

@@ -1,0 +1,12 @@
+# Nightly at ~03:00. Persistent=true catches up on a missed run if the
+# machine was off at 03:00 (common for a homelab VM or laptop).
+[Unit]
+Description=Nightly portfolio database backup
+
+[Timer]
+OnCalendar=*-*-* 03:00:00
+RandomizedDelaySec=15m
+Persistent=true
+
+[Install]
+WantedBy=timers.target
