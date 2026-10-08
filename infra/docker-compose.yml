@@ -2,15 +2,18 @@
 # exposed beyond the compose network.
 services:
   caddy:
-    image: caddy:2-alpine
+    image: docker.io/library/caddy:2-alpine
     restart: unless-stopped
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      # Z relabels the file for SELinux hosts (Fedora/RHEL); ignored elsewhere.
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro,Z
       - caddy_data:/data
       - caddy_config:/config
+    environment:
+      API_DOMAIN: ${API_DOMAIN}
     depends_on:
       - api
 
@@ -29,7 +32,7 @@ services:
       - '3001'
 
   db:
-    image: postgres:17-alpine
+    image: docker.io/library/postgres:17-alpine
     restart: unless-stopped
     environment:
       POSTGRES_DB: portfolio

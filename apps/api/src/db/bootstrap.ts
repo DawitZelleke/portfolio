@@ -2,9 +2,10 @@ import { sql } from 'drizzle-orm';
 import { db } from './client.js';
 
 /**
- * Idempotent DDL bootstrap for dev/test (PGlite has no migration files
- * applied out-of-band). Production uses drizzle-kit generated SQL
- * migrations — see drizzle.config.ts and /drizzle.
+ * Idempotent DDL bootstrap, run on every boot in every environment.
+ * Creates missing types/tables on a fresh database (PGlite or Postgres).
+ * It cannot alter existing tables — schema changes need drizzle-kit
+ * migrations (see drizzle.config.ts) once those are generated.
  */
 export async function bootstrapSchema() {
   await db.execute(sql`

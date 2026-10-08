@@ -1,6 +1,7 @@
-# Replace api.yourdomain.com with the real API hostname once the domain
-# is purchased. Caddy provisions and renews Let's Encrypt certs itself.
-api.yourdomain.com {
+# The site address comes from API_DOMAIN in infra/.env:
+#   production: api.yourdomain.com   → Caddy gets and renews Let's Encrypt certs
+#   staging:    http://192.168.122.35 → plain HTTP inside the homelab
+{$API_DOMAIN} {
 	encode zstd gzip
 
 	header {
