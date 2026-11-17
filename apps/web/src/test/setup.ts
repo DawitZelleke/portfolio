@@ -1,4 +1,8 @@
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
+
+// Navigation scroll behavior is checked in the browser; jsdom has no scrolling.
+window.scrollTo = vi.fn();
 
 // jsdom lacks IntersectionObserver; useReveal (and future motion code) needs it.
 class IntersectionObserverStub implements IntersectionObserver {

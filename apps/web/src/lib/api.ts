@@ -1,11 +1,19 @@
-import { projectCardSchema, projectSchema, type Project, type ProjectCard } from '@portfolio/shared';
+import {
+  projectCardSchema,
+  projectSchema,
+  type Project,
+  type ProjectCard,
+} from '@portfolio/shared';
 import { z } from 'zod';
 import { projectFixtures } from '@/content/projects';
 
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api/v1';
 
+const USE_PROJECT_API = import.meta.env.VITE_PROJECT_SOURCE === 'api';
+
 async function getJson(path: string): Promise<unknown> {
-  if (import.meta.env.VITE_STATIC_ONLY === 'true') throw new Error('Bundled content mode');
+  if (import.meta.env.VITE_STATIC_ONLY === 'true')
+    throw new Error('Bundled content mode');
   const res = await fetch(`${API_BASE}${path}`, {
     headers: { Accept: 'application/json' },
   });
@@ -14,37 +22,43 @@ async function getJson(path: string): Promise<unknown> {
 }
 
 /**
- * Published project cards. Server first; bundled fixtures as offline
- * fallback so the public site never depends on backend uptime.
+ * Public projects use reviewed bundled content by default. Set
+ * VITE_PROJECT_SOURCE=api to use admin-managed records with a bundled fallback.
  */
 export async function fetchProjects(): Promise<ProjectCard[]> {
   try {
+    if (!USE_PROJECT_API) throw new Error('Curated project content');
     const data = await getJson('/projects');
     return z.array(projectCardSchema).parse(data);
   } catch {
     return projectFixtures
       .filter((p) => p.status === 'published')
-      .map(({ id, slug, title, summary, tech, links, coverImage, featured, sortOrder }) => ({
-        id,
-        slug,
-        title,
-        summary,
-        tech,
-        links,
-        coverImage,
-        featured,
-        sortOrder,
-      }))
+      .map(
+        ({ id, slug, title, summary, tech, links, coverImage, featured, sortOrder }) => ({
+          id,
+          slug,
+          title,
+          summary,
+          tech,
+          links,
+          coverImage,
+          featured,
+          sortOrder,
+        }),
+      )
       .sort((a, b) => a.sortOrder - b.sortOrder);
   }
 }
 
 export async function fetchProject(slug: string): Promise<Project | null> {
   try {
+    if (!USE_PROJECT_API) throw new Error('Curated project content');
     const data = await getJson(`/projects/${slug}`);
     return projectSchema.parse(data);
   } catch {
-    return projectFixtures.find((p) => p.slug === slug && p.status === 'published') ?? null;
+    return (
+      projectFixtures.find((p) => p.slug === slug && p.status === 'published') ?? null
+    );
   }
 }
 

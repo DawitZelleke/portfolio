@@ -4,7 +4,7 @@ import { skills } from '@/content/site';
 
 export function SkillsSection() {
   return (
-    <Section id="skills" entry="02 · capabilities" title="What I work with">
+    <Section id="skills" entry="03 · skills" title="What I work with">
       <Reveal stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {skills.map((group) => (
           <RevealItem
