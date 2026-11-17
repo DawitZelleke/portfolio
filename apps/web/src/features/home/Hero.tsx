@@ -66,7 +66,7 @@ export function Hero() {
         </motion.p>
 
         <motion.div className="mt-9 flex flex-wrap items-center gap-3" {...fadeUp(0.55)}>
-          <ButtonLink to="#projects" external>
+          <ButtonLink to="/#projects">
             View my work
           </ButtonLink>
           <ButtonLink to={site.resumePath} external variant="secondary">
