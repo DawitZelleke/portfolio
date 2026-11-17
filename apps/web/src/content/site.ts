@@ -5,25 +5,27 @@
 export const site = {
   brand: 'DAVEVSGOLIATH',
   name: 'Dawit Zelleke',
-  role: 'Full-stack developer',
-  tagline: 'I build web applications that are safe to trust.',
+  role: 'Junior web / full-stack developer',
+  tagline: 'I build database-backed web applications with C#, PHP, and JavaScript.',
+  availability: 'Available January 2027',
+  graduation: 'Expected December 2026',
   location: 'Ottawa, ON',
   email: 'Dawit.Zelleke13@gmail.com',
   github: 'https://github.com/DawitZelleke',
   linkedin: 'https://linkedin.com/in/DawitZelleke13',
   resumePath: '/Dawit_Zelleke_Resume.pdf',
   meta: {
-    title: 'Dawit Zelleke — Full-stack developer, Ottawa',
+    title: 'Dawit Zelleke — Junior web developer, Ottawa',
     description:
-      'Full-stack developer in Ottawa building secure, backend-focused web applications. JavaScript, Node.js, React, PostgreSQL — with RBAC, encryption, and audit logging built in.',
+      'Junior web developer in Ottawa. ASP.NET Core, Laravel, React, and SQL. Graduating December 2026; available January 2027.',
   },
 } as const;
 
 export const navSections = [
   { id: 'top', label: 'Home' },
+  { id: 'projects', label: 'Projects' },
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
-  { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
   { id: 'education', label: 'Education' },
   { id: 'off-duty', label: 'Off-duty' },
@@ -33,29 +35,35 @@ export const navSections = [
 export const skills = [
   {
     group: 'Languages',
-    items: ['JavaScript', 'TypeScript', 'Python', 'SQL', 'C/C++ (coursework)'],
+    items: ['C#', 'PHP', 'JavaScript', 'TypeScript', 'SQL', 'HTML', 'CSS'],
   },
   {
-    group: 'Web & frameworks',
-    items: ['React', 'Node.js', 'Express', 'HTML5', 'CSS3', 'Tailwind CSS'],
+    group: 'Web applications',
+    items: ['ASP.NET Core MVC', 'Laravel', 'Livewire', 'React', 'Node.js', 'Express'],
   },
   {
     group: 'Data',
-    items: ['PostgreSQL', 'MongoDB', 'REST API design', 'Drizzle ORM'],
+    items: [
+      'Entity Framework Core',
+      'Eloquent',
+      'SQLite',
+      'PostgreSQL',
+      'Database migrations',
+    ],
   },
   {
-    group: 'Security',
+    group: 'Application security',
     items: [
-      'Role-based access control',
-      'Encryption at rest & in transit',
-      'Audit logging',
-      'HTTPS/TLS',
+      'Ownership authorization',
+      'CSRF protection',
+      'Parameterized queries',
+      'Password hashing',
       'Input validation',
     ],
   },
   {
-    group: 'Tools & practices',
-    items: ['Git/GitHub', 'Linux & bash', 'Docker', 'Agile/Scrum', 'Automated testing', 'Figma'],
+    group: 'Testing and workflow',
+    items: ['PHPUnit', 'Vitest', 'Git', 'GitHub', 'Linux', 'Regression testing'],
   },
 ] as const;
 
@@ -66,7 +74,6 @@ export const experience = [
     span: '2020 — 2025',
     where: 'Ottawa, ON',
     points: [
-      'Designed and deployed a full-stack community portal for event registration, volunteer coordination, and service scheduling.',
       'Managed a government-funded food delivery program and led weekly digital literacy workshops for seniors.',
     ],
   },
@@ -103,7 +110,7 @@ export const education = [
   {
     school: 'Algonquin College',
     program: 'Diploma, Web Development & Internet Applications',
-    span: 'Expected 2026',
+    span: 'Expected December 2026',
   },
   {
     school: 'Carleton University',

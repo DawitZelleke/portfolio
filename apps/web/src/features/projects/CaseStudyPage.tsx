@@ -38,7 +38,9 @@ export function CaseStudyPage() {
       <div className="mx-auto max-w-3xl px-5 pb-24 pt-36 text-center">
         <p className="ledger mb-4">404 · not on the record</p>
         <h1 className="font-display text-display font-semibold">No such case study</h1>
-        <p className="mt-4 text-ink-soft">It may have been unpublished, or the link is off.</p>
+        <p className="mt-4 text-ink-soft">
+          It may have been unpublished, or the link is off.
+        </p>
         <div className="mt-8">
           <ButtonLink to="/#projects">Back to projects</ButtonLink>
         </div>
@@ -52,7 +54,9 @@ export function CaseStudyPage() {
         <Reveal>
           <p className="ledger ledger-rule mb-5">
             case study ·{' '}
-            {project.publishedAt ? new Date(project.publishedAt).getFullYear() : 'project overview'}
+            {project.publishedAt
+              ? new Date(project.publishedAt).getFullYear()
+              : 'project overview'}
           </p>
           <h1 className="font-display text-display font-bold tracking-tight text-ink">
             {project.title}
@@ -71,6 +75,11 @@ export function CaseStudyPage() {
                 View source ↗
               </ButtonLink>
             )}
+            {project.links.docs && (
+              <ButtonLink to={project.links.docs} external variant="secondary">
+                Verification notes
+              </ButtonLink>
+            )}
             {project.links.live && (
               <ButtonLink to={project.links.live} external>
                 Visit live ↗
@@ -79,15 +88,15 @@ export function CaseStudyPage() {
           </div>
         </Reveal>
 
-        <Reveal
-          className="prose-custom mt-12 border-t border-line pt-10"
-          delay={0.1}
-        >
+        <Reveal className="prose-custom mt-12 border-t border-line pt-10" delay={0.1}>
           <Markdown remarkPlugins={[remarkGfm]}>{project.body}</Markdown>
         </Reveal>
 
         <div className="mt-16 border-t border-line pt-8">
-          <Link to="/#projects" className="font-semibold text-accent underline-offset-4 hover:underline">
+          <Link
+            to="/#projects"
+            className="font-semibold text-accent underline-offset-4 hover:underline"
+          >
             ← All projects
           </Link>
         </div>

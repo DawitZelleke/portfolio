@@ -13,7 +13,11 @@ export function Hero() {
 
   const line = (delay: number) =>
     reduce
-      ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.2 } }
+      ? {
+          initial: { opacity: 0 },
+          animate: { opacity: 1 },
+          transition: { duration: 0.2 },
+        }
       : {
           initial: { y: '110%' },
           animate: { y: '0%' },
@@ -22,7 +26,11 @@ export function Hero() {
 
   const fadeUp = (delay: number) =>
     reduce
-      ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.2 } }
+      ? {
+          initial: { opacity: 0 },
+          animate: { opacity: 1 },
+          transition: { duration: 0.2 },
+        }
       : {
           initial: { opacity: 0, y: 14 },
           animate: { opacity: 1, y: 0 },
@@ -33,7 +41,7 @@ export function Hero() {
     <section id="top" className="bg-canvas px-5 pb-20 pt-36 sm:px-8 sm:pt-44">
       <div className="mx-auto w-full max-w-5xl">
         <motion.p className="ledger ledger-rule mb-6" {...fadeUp(0.05)}>
-          00 · {site.location} · open to co-op &amp; freelance
+          {site.location} · {site.availability}
         </motion.p>
 
         <h1 className="font-display text-display-xl font-bold tracking-tight text-ink">
@@ -53,12 +61,12 @@ export function Hero() {
           className="mt-6 max-w-xl text-lg text-ink-soft sm:text-xl"
           {...fadeUp(0.42)}
         >
-          {site.role}. {site.tagline} Node.js and React on the surface — role-based access
-          control, encryption, and audit logging underneath.
+          {site.role}. {site.tagline} My work includes ASP.NET Core and Laravel
+          applications, ownership checks, and documented security fixes.
         </motion.p>
 
         <motion.div className="mt-9 flex flex-wrap items-center gap-3" {...fadeUp(0.55)}>
-          <ButtonLink to="#projects" external>
+          <ButtonLink to="/#projects">
             View my work
           </ButtonLink>
           <ButtonLink to={site.resumePath} external variant="secondary">

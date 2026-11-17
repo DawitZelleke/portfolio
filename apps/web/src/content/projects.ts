@@ -1,78 +1,102 @@
 import type { Project } from '@portfolio/shared';
 
-/** Resume-aligned projects; retained as the API's offline fallback. */
+/** Curated public case studies and preserved supplemental project routes. */
 export const projectFixtures: Project[] = [
   {
-    "title": "Budget Tracker",
-    "status": "published",
-    "sortOrder": 1,
-    "summary": "ASP.NET MVC budget tracker with scaffolded CRUD screens, multi-column sorting, and delete confirmation dialogs.",
-    "publishedAt": null,
-    "slug": "budget-tracker",
-    "tech": [
-      "ASP.NET MVC",
-      "Entity Framework Core",
-      "SQLite",
-      "JavaScript"
-    ],
-    "featured": true,
-    "links": {},
-    "coverImage": null,
-    "body": "## Academic project · 2026\n\nA budget tracking application built with ASP.NET MVC, Entity Framework Core, and SQLite.\n\n## What I built\n\n- Scaffolded a data context and full create, read, update, and delete controller and views from an existing SQLite database using Entity Framework Core.\n- Added multi-column sorting on date, description, and amount.\n- Added JavaScript confirmation dialogs on delete actions.",
-    "id": "0b8f4a3e-2222-4c01-9e1a-000000000001"
+    id: '0b8f4a3e-2222-4c01-9e1a-000000000001',
+    slug: 'budget-tracker',
+    title: 'Budget Tracker',
+    summary:
+      'ASP.NET Core MVC application for income and expenses. Database-side sorting, validated record updates, and antiforgery-protected forms.',
+    tech: ['C#', 'ASP.NET Core MVC', 'Entity Framework Core', 'SQLite'],
+    links: {
+      github: 'https://github.com/DawitZelleke/BudgetTracker',
+    },
+    body: '## Academic project · 2026\n\nBudget Tracker records income and expenses by category. I extended scaffolded MVC screens with sorting and safer update and delete flows.\n\n## My contribution\n\n- Added date, description, and amount sorting before the query is executed by Entity Framework Core.\n- Loaded category data with the transaction query and used read-only tracking behavior for the list.\n- Preserved the original creation timestamp by loading the stored entity and copying only editable fields during updates.\n- Used POST requests with antiforgery validation for changes and a confirmation dialog for deletion.\n\n## Engineering decision\n\nA confirmation dialog helps prevent accidental deletion, but it is not a security control. The controller checks the request method and antiforgery token on the server. Creation timestamps are also controlled by the server rather than accepted from the form.\n\n## Evidence\n\nThe transaction controller contains the query and update logic. The repository README explains the data model and local setup.\n\n## Current scope\n\nThis is an academic application, not a multi-user finance service. The transaction controller does not implement per-user ownership authorization. Automated regression tests and user isolation are priorities before using it with personal financial data.\n',
+    status: 'published',
+    sortOrder: 1,
+    featured: true,
+    coverImage: null,
+    publishedAt: null,
   },
   {
-    "title": "Student Records Application",
-    "status": "published",
-    "sortOrder": 2,
-    "summary": "Razor Pages application for student and academic records, with linked entities, sortable indexes, aggregate totals, and duplicate-key validation.",
-    "publishedAt": null,
-    "slug": "student-records",
-    "tech": [
-      "ASP.NET Razor Pages",
-      "Entity Framework Core"
-    ],
-    "featured": true,
-    "links": {},
-    "coverImage": null,
-    "body": "## Academic project · 2026\n\nA student records application built with ASP.NET Razor Pages and Entity Framework Core.\n\n## What I built\n\n- Built create, read, update, and delete pages for student and academic record entities, including a linked table joining the two.\n- Implemented sortable index pages with aggregate totals.\n- Added duplicate-key validation on entry forms.\n- Persisted sort state in the user session.",
-    "id": "0b8f4a3e-2222-4c01-9e1a-000000000002"
+    id: '0b8f4a3e-2222-4c01-9e1a-000000000005',
+    slug: 'devtalk-security',
+    title: 'DevTalk Security Lab',
+    summary:
+      'Security remediation of a supplied PHP forum. Documented vulnerabilities, implemented protections, and recorded before-and-after regression checks.',
+    tech: ['PHP', 'SQLite', 'Application security', 'Regression testing'],
+    links: {
+      github: 'https://github.com/DawitZelleke/devtalk-labs',
+      docs: 'https://github.com/DawitZelleke/devtalk-labs/blob/main/PATCH-LOG.md',
+    },
+    body: "## Academic security lab · 2026\n\nDevTalk began as a supplied vulnerable forum for CST8265. My contribution was to investigate vulnerabilities, patch the application, and document the results. I did not build the original forum from scratch.\n\n## My contribution\n\n- Replaced vulnerable SQL construction with parameterized queries.\n- Added ownership checks, CSRF tokens, and POST-only handling for state changes.\n- Added password hashing, session ID regeneration, and safer cookie settings.\n- Encoded output and restricted allowed HTML to reduce cross-site scripting risks.\n- Removed server-side image fetching to eliminate that application's SSRF entry point.\n\n## Verification\n\nThe patch log documents nine finding categories, 18 exploit checks, and 16 normal-use checks. It records the expected blocked requests alongside successful ordinary forum operations, with screenshots. These are documented manual checks, not a claim of automated test coverage or an independent security certification.\n\n## Engineering decision\n\nRemoving server-side image fetching gave up a convenience feature but removed the associated outbound-request attack surface. The patch log explains that tradeoff and the checks performed afterward.\n\n## Current scope\n\nThis is an educational lab with local demonstration accounts. The documented checks cover specific cases; they do not prove that the application has no remaining vulnerabilities.\n",
+    status: 'published',
+    sortOrder: 2,
+    featured: true,
+    coverImage: null,
+    publishedAt: null,
   },
   {
-    "title": "Task Manager",
-    "status": "published",
-    "sortOrder": 3,
-    "summary": "Team-built Laravel and Livewire application with account access, personal task lists, due dates, priorities, and customisable list ordering and colour.",
-    "publishedAt": null,
-    "slug": "task-manager",
-    "tech": [
-      "Laravel",
-      "Livewire",
-      "Git",
-      "GitHub"
-    ],
-    "featured": true,
-    "links": {},
-    "coverImage": null,
-    "body": "## Academic team project · 2026\n\nA team-built task management application using Laravel and Livewire.\n\n## What we built\n\n- User registration and login, with each user able to see and edit only their own task lists.\n- Tasks with due dates and priority levels.\n- Customisable list ordering and colour.\n- Database migrations with seed data.\n\n## Collaboration\n\nWe collaborated through a shared private GitHub repository using branches and pull requests.",
-    "id": "0b8f4a3e-2222-4c01-9e1a-000000000003"
+    id: '0b8f4a3e-2222-4c01-9e1a-000000000006',
+    slug: 'ideanest',
+    title: 'IdeaNest',
+    summary:
+      'Laravel and Livewire idea-sharing application with comments, voting, ownership policies, and feature tests for allowed and forbidden actions.',
+    tech: ['PHP', 'Laravel', 'Livewire', 'SQLite', 'PHPUnit'],
+    links: {},
+    body: '## Web application project\n\nIdeaNest lets registered users post ideas, discuss them, and vote. The repository is currently private; this page describes its implementation without presenting an inaccessible source link.\n\n## Implementation\n\n- Laravel policies restrict idea updates and deletion to the owner.\n- Livewire components handle idea creation, editing, comments, and vote toggling.\n- Feature tests cover invalid input, owner and non-owner actions, comment permissions, and voting.\n- A test attempts a duplicate vote directly against the database to check the uniqueness constraint independently of the interface.\n\n## Engineering decision\n\nThe interface is not the only enforcement point. Ownership policies handle authorization, and a database constraint prevents duplicate votes even when a caller bypasses the normal toggle interaction.\n\n## Verification and access\n\nThe repository includes PHPUnit feature and unit tests and local setup instructions. A passing test count is not asserted here. Public source access and a hosted demonstration are not currently provided.\n',
+    status: 'published',
+    sortOrder: 3,
+    featured: true,
+    coverImage: null,
+    publishedAt: null,
   },
   {
-    "title": "Invoice Manager",
-    "status": "published",
-    "sortOrder": 4,
-    "summary": "PHP invoicing application extended with PDF upload, in-browser document viewing, live client-side search, and PDO prepared statements.",
-    "publishedAt": null,
-    "slug": "invoice-manager",
-    "tech": [
-      "PHP",
-      "PDO",
-      "MySQL"
-    ],
-    "featured": true,
-    "links": {},
-    "coverImage": null,
-    "body": "## Academic project · 2025\n\nExtensions to an existing invoicing application built with PHP, PDO, and MySQL.\n\n## What I added\n\n- PDF document upload and in-browser viewing.\n- A live client-side search filter.\n- PDO prepared statements for all database access.",
-    "id": "0b8f4a3e-2222-4c01-9e1a-000000000004"
-  }
+    title: 'Student Records Application',
+    status: 'published',
+    sortOrder: 4,
+    summary:
+      'Razor Pages application for student and academic records, with linked entities, sortable indexes, aggregate totals, and duplicate-key validation.',
+    publishedAt: null,
+    slug: 'student-records',
+    tech: ['ASP.NET Razor Pages', 'Entity Framework Core'],
+    featured: false,
+    links: {},
+    coverImage: null,
+    body: '## Academic project · 2026\n\nA student records application built with ASP.NET Razor Pages and Entity Framework Core.\n\n## What I built\n\n- Built create, read, update, and delete pages for student and academic record entities, including a linked table joining the two.\n- Implemented sortable index pages with aggregate totals.\n- Added duplicate-key validation on entry forms.\n- Persisted sort state in the user session.',
+    id: '0b8f4a3e-2222-4c01-9e1a-000000000002',
+  },
+  {
+    title: 'Task Manager',
+    status: 'published',
+    sortOrder: 5,
+    summary:
+      'Team-built Laravel and Livewire application with account access, personal task lists, due dates, priorities, and customisable list ordering and colour.',
+    publishedAt: null,
+    slug: 'task-manager',
+    tech: ['Laravel', 'Livewire', 'Git', 'GitHub'],
+    featured: false,
+    links: {},
+    coverImage: null,
+    body: '## Academic team project · 2026\n\nA team-built task management application using Laravel and Livewire.\n\n## What we built\n\n- User registration and login, with each user able to see and edit only their own task lists.\n- Tasks with due dates and priority levels.\n- Customisable list ordering and colour.\n- Database migrations with seed data.\n\n## Collaboration\n\nWe collaborated through a shared private GitHub repository using branches and pull requests.',
+    id: '0b8f4a3e-2222-4c01-9e1a-000000000003',
+  },
+  {
+    title: 'Invoice Manager',
+    status: 'published',
+    sortOrder: 6,
+    summary:
+      'Laravel and Blade invoicing application with SQLite, status filters, validated forms, and client-side search. Repository setup needs repair.',
+    publishedAt: null,
+    slug: 'invoice-manager',
+    tech: ['PHP', 'Laravel', 'Blade', 'SQLite', 'JavaScript'],
+    featured: false,
+    links: {
+      github: 'https://github.com/DawitZelleke/Invoice-Manager',
+    },
+    coverImage: null,
+    body: '## Academic project · 2025\n\nThe current public repository uses Laravel, Blade, Eloquent, and SQLite. This description refers to that version.\n\n## Implementation\n\nThe controller supports invoice creation, editing, deletion, status filters, and totals. Validation checks invoice-number format and uniqueness, email format, non-negative integer amounts, and valid status references. The interface adds client-side search and a live receipt preview.\n\n## Current limitations\n\nThe repository is not yet packaged for a reliable clean-clone setup: its root is missing the Composer manifest, artisan entry point, and environment example referenced by the original instructions. It also has no authentication. It is supporting coursework, not a production invoicing service.\n',
+    id: '0b8f4a3e-2222-4c01-9e1a-000000000004',
+  },
 ];
